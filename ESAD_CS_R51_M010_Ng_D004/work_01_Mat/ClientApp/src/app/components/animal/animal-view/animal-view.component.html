@@ -1,0 +1,51 @@
+<mat-card class="card-container">
+  <mat-card-header>
+    <mat-card-title>Animals</mat-card-title>
+    <mat-card-subtitle>International animal</mat-card-subtitle>
+    <span class="filter"></span>
+    <a mat-mini-fab color="primary" [routerLink]="['/add-animal']"><mat-icon>add</mat-icon></a>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="table-container mat-elevation-z8">
+      <mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="picture">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Animal Name</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <img class="row-image" src="/Uploads/{{element.picture}}" width="50" height="50" />
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Animal Name</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.animalName}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="species">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>species</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.spaciesName}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="introduced">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Introduced</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.introduced|date:'yyyy-MMM-dd'}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="gender">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Gender</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.gender}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="zoo">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Zoo</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{getZooName(element.zooId)}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef>...</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button mat-icon-button [routerLink]="['/edit-animal',element.animalId]"><mat-icon>edit</mat-icon></button>
+            <button mat-icon-button color="warn" (click)="confirmDelete(element)"><mat-icon>delete</mat-icon></button>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="columnList"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: columnList;"></mat-row>
+      </mat-table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20,100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+    </div>
+  </mat-card-content>
+</mat-card>
+

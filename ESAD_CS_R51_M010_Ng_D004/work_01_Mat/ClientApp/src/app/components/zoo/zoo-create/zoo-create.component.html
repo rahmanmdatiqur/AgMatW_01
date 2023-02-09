@@ -1,0 +1,19 @@
+<form class="form-container" [formGroup]="zooForm" (submit)="insert()">
+  <div class="f-w">
+    <h3>Create New Zoo</h3>
+  </div>
+  <mat-form-field appearance="fill" class="f-w">
+    <mat-label>Zoo Name</mat-label>
+    <input matInput formControlName="zooName">
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="f-w">
+    <mat-label>Location</mat-label>
+    <input matInput formControlName="location">
+  </mat-form-field>
+  <div class="f-w">
+    <button [disabled]="zooForm.invalid" mat-raised-button type="submit" color="accent"><mat-icon>save_alt</mat-icon> Save</button>
+  </div>
+  <div class="f-w">
+    <a mat-button [routerLink]="['/zoo']"><mat-icon>arrow_back</mat-icon>Back to list</a>
+  </div>
+</form>
